@@ -1,4 +1,4 @@
-package dev.jcampos.spring5webapp.model.repositories;
+package dev.jcampos.spring5webapp.repositories;
 
 import dev.jcampos.spring5webapp.model.Author;
 import org.springframework.data.repository.CrudRepository;
