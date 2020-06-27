@@ -29,25 +29,44 @@ public class DevBoostrap implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private void initData() {
-        // Eric
-        Publisher allison = new Publisher("Allison Wesley" , "NY, USA");
-        Author eric = new Author("Eric","Evans");
-        Book ddd = new Book("Domain Driven Design", "1234", allison);
+
+        System.out.println("Started in Bootstrap");
+
+        Publisher publisher = new Publisher();
+        publisher.setName("SFG Publishing");
+        publisher.setCity("St Petersburg");
+        publisher.setState("FL");
+
+        publisherRepository.save(publisher);
+
+        System.out.println("Publisher Count: " + publisherRepository.count());
+
+        Author eric = new Author("Eric", "Evans");
+        Book ddd = new Book("Domain Driven Design", "123123");
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
-        publisherRepository.save(allison);
+        ddd.setPublisher(publisher);
+        publisher.getBooks().add(ddd);
+
         authorRepository.save(eric);
         bookRepository.save(ddd);
+        publisherRepository.save(publisher);
 
-        // Rod
-        Publisher prentice = new Publisher("Prentice Hall" , "Madrid, Spain");
-        Author rod = new Author("Rod","Johnson");
-        Book noEJB = new Book("J2EE Development without EJB", "23444", prentice);
+        Author rod = new Author("Rod", "Johnson");
+        Book noEJB = new Book("J2EE Development without EJB", "3939459459");
         rod.getBooks().add(noEJB);
+        noEJB.getAuthors().add(rod);
 
-        publisherRepository.save(prentice);
+        noEJB.setPublisher(publisher);
+        publisher.getBooks().add(noEJB);
+
         authorRepository.save(rod);
         bookRepository.save(noEJB);
+        publisherRepository.save(publisher);
+
+        System.out.println("Number of Books: " + bookRepository.count());
+        System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
+
     }
 }
